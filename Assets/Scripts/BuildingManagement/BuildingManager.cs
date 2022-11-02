@@ -9,6 +9,8 @@ public class BuildingManager : MonoBehaviour
 
     private List<Building> rootRoads = new List<Building>();
 
+    private AstarPathfinding pathfinder = new AstarPathfinding();
+
     public void registerRootRoad(Building rootRoad)
     {
         roads.Remove(rootRoad);
@@ -95,6 +97,33 @@ public class BuildingManager : MonoBehaviour
         {
             b.checkRoadConnections();
             b.checkWorking();
+        }
+
+
+
+
+        /*** ASTAR TEST ***/
+        
+        pathfinder.updateGrid(gridManager.getGrid(), gridManager.gridSize.x);
+        
+        List<Building> allroads = new List<Building>(rootRoads);
+        allroads.AddRange(roads);
+
+        GridNode roadA = allroads[(int)(Random.value * (allroads.Count - 1))].associatedNode;
+        GridNode roadB = allroads[(int)(Random.value * (allroads.Count - 1))].associatedNode;
+
+        Debug.Log("Trying from " + roadA.x + " ," + roadA.y + " to " + roadB.x + " ," + roadB.y);
+        
+        Vector2Int[] path = pathfinder.findPath(roadA, roadB);
+        
+        Vector3 x = new Vector3(0,1,0);
+
+        foreach(Vector2Int gridPos in path)
+        {
+            GridNode node = gridManager.getNodeAt(gridPos.x, gridPos.y);
+            Debug.DrawLine(gridManager.gridNodeToWorld(node), gridManager.gridNodeToWorld(node) + x, Color.red, 5);
+
+            x.y += 0.2f;
         }
     }
 

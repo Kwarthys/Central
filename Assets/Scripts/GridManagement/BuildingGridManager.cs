@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuildingGridManager : MonoBehaviour
 {
     private GridNode[] grid;
+    public GridNode[] getGrid() { return grid; }
 
     public float gridNodeSize = 1;
 
