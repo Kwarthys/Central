@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5613e24a34e60694a9871c330d737c11, type: 3}
+  m_Name: TrainginFieldObject
+  m_EditorClassIdentifier: 
+  buildingName: Training Field
+  image: {fileID: 21300000, guid: 01623b673f3d85c4880bc2991eaa19d6, type: 3}
+  buildingGhost: {fileID: 5688442073024933569, guid: e5876da6b0d02d14987480c1b7b64d33,
+    type: 3}

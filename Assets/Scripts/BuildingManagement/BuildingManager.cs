@@ -102,8 +102,8 @@ public class BuildingManager : MonoBehaviour
 
 
 
-        /*** ASTAR TEST ***/
-        
+        /*** ASTAR RANDOM TEST ***/
+        /*
         pathfinder.updateGrid(gridManager.getGrid(), gridManager.gridSize.x);
         
         List<Building> allroads = new List<Building>(rootRoads);
@@ -118,13 +118,17 @@ public class BuildingManager : MonoBehaviour
         
         Vector3 x = new Vector3(0,1,0);
 
-        foreach(Vector2Int gridPos in path)
+        if(path != null)
         {
-            GridNode node = gridManager.getNodeAt(gridPos.x, gridPos.y);
-            Debug.DrawLine(gridManager.gridNodeToWorld(node), gridManager.gridNodeToWorld(node) + x, Color.red, 5);
+            foreach(Vector2Int gridPos in path)
+            {
+                GridNode node = gridManager.getNodeAt(gridPos.x, gridPos.y);
+                Debug.DrawLine(gridManager.gridNodeToWorld(node), gridManager.gridNodeToWorld(node) + x, Color.red, 5);
 
-            x.y += 0.2f;
+                x.y += 0.2f;
+            }
         }
+        */
     }
 
     private void resetAllRoadConnected()

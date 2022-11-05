@@ -26,6 +26,33 @@ public class BuildingPlacer : MonoBehaviour
     private Transform flyingBuilding;
     private BuildingDescriptor flyingDescriptor;
 
+    public GameObject builderMenu;
+    private bool builderMenuActive = false;
+
+
+    private static BuildingPlacer instance;
+    public static void enterBuildingMode(GameObject ghostPrefab)
+    {
+        instance.startBuilding(ghostPrefab);
+    }
+
+    private void Awake()
+    {
+        BuildingPlacer.instance = this;
+    }
+
+    private void startBuilding(GameObject ghostPrefab)
+    {
+        placingPrefab = ghostPrefab;
+        flyingBuilding = Instantiate(ghostPrefab).transform;
+        flyingDescriptor = flyingBuilding.GetComponent<BuildingDescriptor>();
+
+        builderMenu.SetActive(false);
+        builderMenuActive = false;
+
+        placing = true;
+    }
+
     private void Start()
     {
         /*** INSTANCIATE STARTING ROAD ***/
@@ -44,12 +71,35 @@ public class BuildingPlacer : MonoBehaviour
         }
 
         buildingManager.recomputeRoadConnected();
+
+        builderMenu.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!placing)
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            //Toggle Building Menu
+            if(builderMenuActive)
+            {
+                //deactivate menu
+                builderMenu.SetActive(false);
+                builderMenuActive = false;
+            }
+            else
+            {
+                //activate
+                builderMenu.SetActive(true);
+                builderMenuActive = true;
+            }
+        }
+
+
+
+        /*
+
+        if (!placing)
         {
             if (Input.GetKeyDown(KeyCode.S))
             {
@@ -71,6 +121,8 @@ public class BuildingPlacer : MonoBehaviour
             }
         }
         else
+        */
+        if(placing)
         {
             if(Input.GetKeyDown(KeyCode.R))
             {
@@ -80,7 +132,7 @@ public class BuildingPlacer : MonoBehaviour
             }
 
 
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.B))
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.B))
             {
                 resetAllPlacement();
             }
