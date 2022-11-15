@@ -37,7 +37,7 @@ public class CharacterBody : MonoBehaviour
 
             if(following)
             {
-                transform.position = distancePerFrame * (pathToFollow[currentPathIndex] - transform.position).normalized;
+                transform.position += distancePerFrame * (pathToFollow[currentPathIndex] - transform.position).normalized;
             }
         }
     }

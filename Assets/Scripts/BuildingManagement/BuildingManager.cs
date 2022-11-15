@@ -167,7 +167,7 @@ public class BuildingManager : MonoBehaviour
 
             for(int i = 0; i < worldPath.Length; ++i)
             {
-                worldPath[i] = gridManager.gridNodeToWorld(gridManager.getNodeAt(paths[pathIndex][i].x, paths[pathIndex][i].y)); 
+                worldPath[worldPath.Length - 1 - i] = gridManager.gridNodeToWorld(gridManager.getNodeAt(paths[pathIndex][i].x, paths[pathIndex][i].y)); 
             }
 
             return worldPath;

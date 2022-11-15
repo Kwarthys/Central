@@ -9,7 +9,7 @@ public class Character
     public string action = "";
     public string target = "";
 
-    public int energy { get; private set; } = 100;
+    public int energy { get; private set; } = 50;
 
     public int framesPerEnergyLost = 100;
     private int frameCounter = 0;
@@ -72,6 +72,11 @@ public class Character
 
         if(path!=null)
         {
+            for(int i = 0; i < path.Length; ++i)
+            {
+                Debug.DrawLine(path[i], path[i] + Vector3.up * i * 0.5f, Color.red, 10);
+            }
+
             associatedBody.registerNewPathToFollow(path);
         }
 
