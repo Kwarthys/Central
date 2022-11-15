@@ -19,6 +19,8 @@ public class Building : MonoBehaviour
     [SerializeField]
     protected bool roadConnected = false;
 
+    public bool isItWorking() { return isWorking; }
+
 
     public bool workingplace = false;
     public bool restplace = false;
@@ -114,7 +116,7 @@ public class Building : MonoBehaviour
 
     public bool buildingHasFreeSlot()
     {
-        return slots < users.Count;
+        return users.Count < slots;
     }
 
     public bool addUser(Character newUser)

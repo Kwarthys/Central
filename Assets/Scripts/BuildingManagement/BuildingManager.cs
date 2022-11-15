@@ -99,7 +99,7 @@ public class BuildingManager : MonoBehaviour
             b.checkWorking();
         }
 
-
+        pathfinder.updateGrid(gridManager.getGrid(), gridManager.gridSize.x);
 
 
         /*** ASTAR RANDOM TEST ***/
@@ -131,21 +131,71 @@ public class BuildingManager : MonoBehaviour
         */
     }
 
-    public bool assignCharacterToHouse(Character c)
+    public Vector3[] requestPathFromTo(Vector3 worldPosFrom, Building targetBuilding)
     {
-        foreach(Building b in facilities)
-        {
-            if(b.restplace)
-            {
-                if(b.buildingHasFreeSlot())
-                {
-                    b.addUser(c);
+        GridNode startNode = gridManager.worldPosToNode(worldPosFrom);
 
-                    c.house = b;
+        int pathsToCompute = targetBuilding.connectingNodes.Count;
+        Vector2Int[][] paths = new Vector2Int[pathsToCompute][];
+
+        int smallestLength = int.MaxValue;
+        int pathIndex = -1;
+
+        for (int i = 0; i < pathsToCompute; ++i)
+        {
+            GridNode endNode = targetBuilding.connectingNodes[i];
+
+            paths[i] = pathfinder.findPath(startNode, endNode);
+
+            if (paths[i] != null)
+            {
+                if (paths[i].Length < smallestLength)
+                {
+                    smallestLength = paths[i].Length;
+                    pathIndex = i;
                 }
             }
         }
 
+        if (pathIndex == -1)
+        {
+            return null;
+        }
+        else
+        {
+            Vector3[] worldPath = new Vector3[smallestLength];
+
+            for(int i = 0; i < worldPath.Length; ++i)
+            {
+                worldPath[i] = gridManager.gridNodeToWorld(gridManager.getNodeAt(paths[pathIndex][i].x, paths[pathIndex][i].y)); 
+            }
+
+            return worldPath;
+        }
+    }
+
+    public bool assignCharacterToHouse(Character c)
+    {
+
+        Debug.Log(facilities.Count + " facilites");
+
+        foreach(Building b in facilities)
+        {
+            if(b.restplace && b.isItWorking())
+            {
+                Debug.Log("found house : " + b.users.Count + "/" + b.slots);
+                if (b.buildingHasFreeSlot())
+                {
+                    b.addUser(c);
+
+                    c.house = b;
+
+                    return true;
+                }
+            }
+        }
+
+        Debug.LogWarning("Could not find a house");
 
         return false;
     }

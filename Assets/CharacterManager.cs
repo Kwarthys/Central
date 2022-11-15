@@ -6,24 +6,43 @@ public class CharacterManager : MonoBehaviour
 {
     public BuildingManager buildingManager;
 
-    private List<Character> characters = new List<Character>();
+    public GameObject characterBodyPrefab;
+    public Transform charactersHolder;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        spawnACharacter();
-    }
+    private List<CharacterBody> characters = new List<CharacterBody>();
 
     // Update is called once per frame
     void Update()
     {
-        
+        foreach(CharacterBody cb in characters)
+        {
+            cb.character.live();
+        }
+
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            spawnACharacter();
+        }
     }
 
     private void spawnACharacter()
     {
-        Character test = new Character();
+        Character c = new Character(this);
 
-        buildingManager.assignCharacterToHouse(test);
+        buildingManager.assignCharacterToHouse(c);
+
+        CharacterBody body = Instantiate(characterBodyPrefab, c.house.connectingPoints[0].position, Quaternion.identity, charactersHolder).GetComponent<CharacterBody>();
+
+        if(body != null)
+        {
+            body.character = c;
+            c.associatedBody = body;
+            characters.Add(body);
+        }
+    }
+
+    public Vector3[] requestPathTo(Building b, Character c)
+    {
+        return buildingManager.requestPathFromTo(c.associatedBody.transform.position, b);
     }
 }

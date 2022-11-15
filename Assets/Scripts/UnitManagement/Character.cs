@@ -31,12 +31,24 @@ public class Character
 
     private bool goingToRest = false;
 
+    public CharacterManager manager;
+
+    public CharacterBody associatedBody = null;
+
+
+    public Character(CharacterManager manager)
+    {
+        this.manager = manager;
+    }
+
     public void live()
     {
         if(frameCounter++ >= framesPerEnergyLost)
         {
             frameCounter = 0;
-            energy--;
+            if(energy > 0)energy--;
+
+            Debug.Log("Energy: " + energy);
         }
 
         if(!goingToRest)
@@ -44,6 +56,7 @@ public class Character
             if(needsRest())
             {
                 goingToRest = true;
+                requestPathTo(house);
             }
         }
     }
@@ -51,5 +64,17 @@ public class Character
     public bool needsRest()
     {
         return energy < 20;
+    }
+
+    private bool requestPathTo(Building b)
+    {
+        Vector3[] path = manager.requestPathTo(b, this);
+
+        if(path!=null)
+        {
+            associatedBody.registerNewPathToFollow(path);
+        }
+
+        return path != null;
     }
 }
