@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9133244511569420764}
-  - component: {fileID: 8008144891559850708}
+  - component: {fileID: 6210811842416586707}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -67,7 +67,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8008144891559850708
+--- !u!114 &6210811842416586707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,13 +76,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 9133244511569420765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79287cf7904971344916eef513d2dd60, type: 3}
+  m_Script: {fileID: 11500000, guid: 818b2713c1227424a83239a176157576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   alertPrefab: {fileID: 0}
   gridManager: {fileID: 0}
   connectingPoints:
   - {fileID: 2250350174790758556}
+  isWorking: 0
+  roadConnected: 0
+  workingplace: 0
+  restplace: 1
+  slots: 12
 --- !u!1 &9133244511872675707
 GameObject:
   m_ObjectHideFlags: 0

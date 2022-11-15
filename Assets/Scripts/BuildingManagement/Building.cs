@@ -20,6 +20,13 @@ public class Building : MonoBehaviour
     protected bool roadConnected = false;
 
 
+    public bool workingplace = false;
+    public bool restplace = false;
+
+    public int slots;
+
+    public List<Character> users = new List<Character>();
+
     public void initialize()
     {
         for(int i = 0; i < connectingPoints.Length; ++i)
@@ -93,5 +100,36 @@ public class Building : MonoBehaviour
             spawnAlert();
         }
         */
+    }
+
+    public int getBuildingCapacity()
+    {
+        return slots;
+    }
+
+    public int getBuildingUserCount()
+    {
+        return users.Count;
+    }
+
+    public bool buildingHasFreeSlot()
+    {
+        return slots < users.Count;
+    }
+
+    public bool addUser(Character newUser)
+    {
+        if (!buildingHasFreeSlot()) return false;
+
+        if (!users.Contains(newUser)) return false;
+
+        users.Add(newUser);
+
+        return true;
+    }
+
+    public bool removeUser(Character user)
+    {
+        return users.Remove(user);
     }
 }

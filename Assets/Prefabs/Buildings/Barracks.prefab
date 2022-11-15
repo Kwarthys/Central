@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3457323871656641073}
-  - component: {fileID: 703742398481579518}
+  - component: {fileID: -4780556259148669693}
   m_Layer: 0
   m_Name: Barracks
   m_TagString: Untagged
@@ -132,7 +132,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &703742398481579518
+--- !u!114 &-4780556259148669693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5688442073024933569}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79287cf7904971344916eef513d2dd60, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd9cc720d0ba7444b0992dfbb907a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   alertPrefab: {fileID: 0}
@@ -150,6 +150,7 @@ MonoBehaviour:
   - {fileID: 121059155256065695}
   isWorking: 0
   roadConnected: 0
+  slots: 6
 --- !u!1 &6254708464345025746
 GameObject:
   m_ObjectHideFlags: 0

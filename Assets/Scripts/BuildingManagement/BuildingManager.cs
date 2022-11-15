@@ -131,6 +131,25 @@ public class BuildingManager : MonoBehaviour
         */
     }
 
+    public bool assignCharacterToHouse(Character c)
+    {
+        foreach(Building b in facilities)
+        {
+            if(b.restplace)
+            {
+                if(b.buildingHasFreeSlot())
+                {
+                    b.addUser(c);
+
+                    c.house = b;
+                }
+            }
+        }
+
+
+        return false;
+    }
+
     private void resetAllRoadConnected()
     {
         foreach (Building r in roads)
