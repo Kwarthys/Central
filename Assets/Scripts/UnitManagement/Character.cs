@@ -29,16 +29,35 @@ public class Character
     public Building workplace;
     public Building house;
 
-    private bool goingToRest = false;
+    private bool travelling = false;
 
     public CharacterManager manager;
 
-    public CharacterBody associatedBody = null;
+    private CharacterBody associatedBody = null;
 
+    private StateMachine stateMachine;
 
     public Character(CharacterManager manager)
     {
         this.manager = manager;
+        setupStateMachine();
+    }
+
+    public void setBody(CharacterBody associatedBody)
+    {
+        this.associatedBody = associatedBody;
+        this.associatedBody.registerNewReachDestinationCallback(destinationReachedCallBack);
+    }
+
+    public CharacterBody getBody()
+    {
+        return associatedBody;
+    }
+
+    private void destinationReachedCallBack()
+    {
+        Debug.Log("Char-Has Arrived !");
+        travelling = false;
     }
 
     public void live()
@@ -49,15 +68,6 @@ public class Character
             if(energy > 0)energy--;
 
             Debug.Log("Energy: " + energy);
-        }
-
-        if(!goingToRest)
-        {
-            if(needsRest())
-            {
-                goingToRest = true;
-                requestPathTo(house);
-            }
         }
     }
 
@@ -81,5 +91,27 @@ public class Character
         }
 
         return path != null;
+    }
+
+    private void setupStateMachine()
+    {
+        stateMachine = new StateMachine();
+
+        State resting = new State();
+        State travellingToWork = new State();
+        State working = new State();
+        State travellingToRest = new State();
+
+        resting.setBehaviour(delegate () { energy += 1; });
+        resting.addTransition(new Transition(travellingToWork, delegate() { return energy > 95; }));
+
+        travellingToRest.setOnEnterBehaviour(delegate () { requestPathTo(house); travelling = true;/*freeworkingbuilding*/});
+        travellingToRest.addTransition(new Transition(resting, delegate () { return travelling == false; }));
+
+        working.setBehaviour(delegate () { stamina++; });
+        working.addTransition(new Transition(travellingToRest, delegate () { return needsRest(); }));
+
+        travellingToWork.setOnEnterBehaviour(delegate () { requestPathTo(workplace); travelling = true; });
+        travellingToWork.addTransition(new Transition(working, delegate () { return travelling == false; }));
     }
 }

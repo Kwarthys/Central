@@ -14,9 +14,14 @@ public class CharacterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(CharacterBody cb in characters)
+        for(int i = 0; i < characters.Count; ++i)
         {
+            CharacterBody cb = characters[i];
             cb.character.live();
+            if(cb.isFollowing())
+            {
+                cb.updateBody();
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.U))
@@ -36,13 +41,13 @@ public class CharacterManager : MonoBehaviour
         if(body != null)
         {
             body.character = c;
-            c.associatedBody = body;
+            c.setBody(body);
             characters.Add(body);
         }
     }
 
     public Vector3[] requestPathTo(Building b, Character c)
     {
-        return buildingManager.requestPathFromTo(c.associatedBody.transform.position, b);
+        return buildingManager.requestPathFromTo(c.getBody().transform.position, b);
     }
 }

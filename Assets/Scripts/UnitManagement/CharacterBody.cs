@@ -6,51 +6,21 @@ public class CharacterBody : MonoBehaviour
 {
     public Character character;
 
-    /*** path follower ***/ //path following will most likely become its own component, refining it here for now
+    public PathFollower follower;
 
-    private int currentPathIndex = 0;
-    private Vector3[] pathToFollow;
+    public bool isFollowing(){return follower.following;}
 
-    public float speed;
-
-    private bool following = false;
-
-    private void Update()
+    public void updateBody()
     {
-        if(following)
-        {
-            float distancePerFrame = Time.deltaTime * speed;
-
-            float distanceToNext = Vector3.Distance(pathToFollow[currentPathIndex], transform.position);
-
-            if(distancePerFrame > distanceToNext)
-            {
-                currentPathIndex++;
-
-                if(currentPathIndex >= pathToFollow.Length)
-                {
-                    Debug.Log("Has Arrived !");
-                    following = false;
-                    transform.position = pathToFollow[currentPathIndex - 1];
-                }
-            }
-
-            if(following)
-            {
-                transform.position += distancePerFrame * (pathToFollow[currentPathIndex] - transform.position).normalized;
-            }
-        }
+        follower.updateFollower();
     }
 
     public void registerNewPathToFollow(Vector3[] path)
     {
-        pathToFollow = path;
-        resetPathFollowing();
+        follower.registerNewPathToFollow(path);
     }
-
-    private void resetPathFollowing()
+    public void registerNewReachDestinationCallback(PathFollower.reachDestinationCallback c)
     {
-        currentPathIndex = 0;
-        following = true;
+        follower.registerNewReachDestinationCallback(c);
     }
 }
