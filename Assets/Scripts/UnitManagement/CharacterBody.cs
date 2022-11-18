@@ -8,11 +8,18 @@ public class CharacterBody : MonoBehaviour
 
     public PathFollower follower;
 
+    public int characterEnergy = 0;
+
     public bool isFollowing(){return follower.following;}
 
     public void updateBody()
     {
-        follower.updateFollower();
+        characterEnergy = (int)character.energy;
+
+        if(isFollowing())
+        {
+            follower.updateFollower();
+        }
     }
 
     public void registerNewPathToFollow(Vector3[] path)

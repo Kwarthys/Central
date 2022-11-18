@@ -183,7 +183,7 @@ public class BuildingManager : MonoBehaviour
         {
             if(b.restplace && b.isItWorking())
             {
-                Debug.Log("found house : " + b.users.Count + "/" + b.slots);
+                Debug.Log($"found house : {b.users.Count}/{b.slots}");
                 if (b.buildingHasFreeSlot())
                 {
                     b.addUser(c);
@@ -197,6 +197,26 @@ public class BuildingManager : MonoBehaviour
 
         Debug.LogWarning("Could not find a house");
 
+        return false;
+    }
+
+    public bool tryGetWorkplace(out Building workplace)
+    {
+        for(int i = 0; i < facilities.Count; ++i)
+        {
+            Building b = facilities[i];
+
+            if(b.workingplace && b.isItWorking())
+            {
+                if(b.buildingHasFreeSlot())
+                {
+                    workplace = b;
+                    return true;
+                }
+            }
+        }
+
+        workplace = null;
         return false;
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class State
 {
@@ -8,6 +9,13 @@ public class State
     private stateBehaviour onEnter;
     private stateBehaviour onExit;
     private stateBehaviour behaviour;
+
+    public string stateName = "state";
+
+    public State(string name)
+    {
+        this.stateName = name;
+    }
 
     private List<Transition> transitions = new List<Transition>();
 

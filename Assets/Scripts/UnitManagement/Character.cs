@@ -9,10 +9,10 @@ public class Character
     public string action = "";
     public string target = "";
 
-    public int energy { get; private set; } = 50;
+    public float energy { get; private set; } = 100;
 
-    public int framesPerEnergyLost = 100;
-    private int frameCounter = 0;
+    public int lostEnergyPerSec = 50;
+    public int restingEnergyGainPerSec = 40;
 
     public short stamina = 50;
     public float staminaPotential = 1;
@@ -43,6 +43,11 @@ public class Character
         setupStateMachine();
     }
 
+    public void startStateMachine()
+    {
+        stateMachine.startMachine();
+    }
+
     public void setBody(CharacterBody associatedBody)
     {
         this.associatedBody = associatedBody;
@@ -56,24 +61,34 @@ public class Character
 
     private void destinationReachedCallBack()
     {
-        Debug.Log("Char-Has Arrived !");
         travelling = false;
     }
 
-    public void live()
+    public void updateEnergy(bool resting)
     {
-        if(frameCounter++ >= framesPerEnergyLost)
+        if(resting)
         {
-            frameCounter = 0;
-            if(energy > 0)energy--;
-
-            Debug.Log("Energy: " + energy);
+            energy += Time.deltaTime * restingEnergyGainPerSec;
+            if (energy > 100) energy = 100;
+        }
+        else
+        {
+            energy -= Time.deltaTime * lostEnergyPerSec;
+            if (energy < 0) energy = 0;
         }
     }
 
-    public bool needsRest()
+    /* will use this one in interaction with the buildings, where changePerSec will be define per Building
+    public void updateEnergy(float changePerSec)
     {
-        return energy < 20;
+        energy += Time.deltaTime * changePerSec;
+        energy = Mathf.Clamp(energy, 0, 100);
+    }
+    */
+
+    public void live()
+    {
+        stateMachine.updateStateMachine();
     }
 
     private bool requestPathTo(Building b)
@@ -93,25 +108,63 @@ public class Character
         return path != null;
     }
 
+    private bool askForWorkplace()
+    {
+        workplace = manager.askForWorkPlace();
+        return workplace != null;
+    }
+
     private void setupStateMachine()
     {
         stateMachine = new StateMachine();
 
-        State resting = new State();
-        State travellingToWork = new State();
-        State working = new State();
-        State travellingToRest = new State();
+        State resting = new State("Resting");
+        State travellingToWork = new State("TravellingToWork");
+        State working = new State("Working");
+        State travellingToRest = new State("TravellingToRest");
 
-        resting.setBehaviour(delegate () { energy += 1; });
-        resting.addTransition(new Transition(travellingToWork, delegate() { return energy > 95; }));
-
-        travellingToRest.setOnEnterBehaviour(delegate () { requestPathTo(house); travelling = true;/*freeworkingbuilding*/});
+        travellingToRest.setOnEnterBehaviour(travellingToRestEnterBehaviour);
         travellingToRest.addTransition(new Transition(resting, delegate () { return travelling == false; }));
 
-        working.setBehaviour(delegate () { stamina++; });
-        working.addTransition(new Transition(travellingToRest, delegate () { return needsRest(); }));
+        resting.setBehaviour(delegate () { updateEnergy(true); });
+        resting.addTransition(new Transition(travellingToWork, delegate() { return energy > 90; }));
 
-        travellingToWork.setOnEnterBehaviour(delegate () { requestPathTo(workplace); travelling = true; });
+        travellingToWork.setOnEnterBehaviour(travellingToWorkEnterBehaviour);
         travellingToWork.addTransition(new Transition(working, delegate () { return travelling == false; }));
+
+        working.setBehaviour(delegate () { updateEnergy(false); });
+        working.addTransition(new Transition(travellingToRest, delegate () { return energy < 20; }));
+
+        stateMachine.registerState(resting);
+        stateMachine.registerState(working);
+        stateMachine.registerState(travellingToRest, true);
+        stateMachine.registerState(travellingToWork);
+    }
+
+    private void travellingToWorkEnterBehaviour()
+    {
+        if (askForWorkplace())
+        {
+            workplace.addUser(this);
+            requestPathTo(workplace);
+            travelling = true;
+        }
+        else
+        {
+            Debug.Log("Could not find any workplace");
+        }
+    }
+
+    private void travellingToRestEnterBehaviour()
+    {
+        requestPathTo(house);
+        travelling = true;
+
+        // freeworkingbuilding
+        if(workplace != null)
+        {
+            workplace.removeUser(this);
+            workplace = null;
+        }
     }
 }

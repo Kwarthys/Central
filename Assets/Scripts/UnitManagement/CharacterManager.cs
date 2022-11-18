@@ -18,10 +18,7 @@ public class CharacterManager : MonoBehaviour
         {
             CharacterBody cb = characters[i];
             cb.character.live();
-            if(cb.isFollowing())
-            {
-                cb.updateBody();
-            }
+            cb.updateBody();
         }
 
         if(Input.GetKeyDown(KeyCode.U))
@@ -44,10 +41,22 @@ public class CharacterManager : MonoBehaviour
             c.setBody(body);
             characters.Add(body);
         }
+
+        c.startStateMachine();
     }
 
     public Vector3[] requestPathTo(Building b, Character c)
     {
         return buildingManager.requestPathFromTo(c.getBody().transform.position, b);
+    }
+
+    public Building askForWorkPlace()
+    {
+        if(buildingManager.tryGetWorkplace(out Building workplace))
+        {
+            return workplace;
+        }
+
+        return null;
     }
 }

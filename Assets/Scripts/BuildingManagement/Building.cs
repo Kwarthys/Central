@@ -123,7 +123,7 @@ public class Building : MonoBehaviour
     {
         if (!buildingHasFreeSlot()) return false;
 
-        if (!users.Contains(newUser)) return false;
+        if (users.Contains(newUser)) return false;
 
         users.Add(newUser);
 

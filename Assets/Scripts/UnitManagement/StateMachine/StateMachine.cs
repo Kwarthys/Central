@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+
 
 public class StateMachine
 {
@@ -7,11 +9,28 @@ public class StateMachine
 
     private State currentState = null;
 
+    public bool go { get; private set; } = false;
+
+    public void startMachine()
+    {
+        go = true;
+        if(currentState != null)
+        {
+            currentState.enter();
+        }
+    }
+
     public void registerState(State s)
     {
         if (states.Contains(s)) return;
 
         states.Add(s);
+    }
+
+    public void registerState(State s, bool makeItCurrent)
+    {
+        registerState(s);
+        currentState = s;
     }
 
     public void setCurrentState(State newState)
@@ -27,10 +46,13 @@ public class StateMachine
 
     public void updateStateMachine()
     {
+        if (!go) return;
+
         if(currentState != null)
         {
             if(currentState.checkTransitions(out State newState))
             {
+                Debug.Log("Switch state from " + currentState.stateName + " to " + newState.stateName);
                 setCurrentState(newState);
             }
 
