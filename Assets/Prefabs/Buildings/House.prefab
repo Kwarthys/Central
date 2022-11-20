@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2250350174790758556}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AccessPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9133244511569420764}
   - component: {fileID: 6210811842416586707}
-  m_Layer: 0
+  - component: {fileID: 2687290425163081269}
+  m_Layer: 7
   m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,15 +80,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818b2713c1227424a83239a176157576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2687290425163081269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9133244511569420765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26545f8f94d6d3448ad869ab8a70be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   alertPrefab: {fileID: 0}
   gridManager: {fileID: 0}
   connectingPoints:
   - {fileID: 2250350174790758556}
+  buildingName: Barracks
   isWorking: 0
   roadConnected: 0
-  workingplace: 0
-  restplace: 1
-  slots: 12
+  slots: 6
 --- !u!1 &9133244511872675707
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +112,7 @@ GameObject:
   - component: {fileID: 9133244511872675703}
   - component: {fileID: 9133244511872675704}
   - component: {fileID: 9133244511872675705}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +210,7 @@ GameObject:
   - component: {fileID: 9133244512224830760}
   - component: {fileID: 9133244512224830761}
   - component: {fileID: 9133244512224830762}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +307,7 @@ GameObject:
   - component: {fileID: 9133244512519105856}
   - component: {fileID: 9133244512519105857}
   - component: {fileID: 9133244512519105858}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

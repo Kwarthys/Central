@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public abstract class Building : MonoBehaviour
 {
     public GameObject alertPrefab;
     public BuildingGridManager gridManager;
@@ -11,6 +11,8 @@ public class Building : MonoBehaviour
 
     public Transform[] connectingPoints;
     public List<GridNode> connectingNodes = new List<GridNode>();
+
+    public string buildingName = "";
 
     protected GameObject spawnedAlert = null;
 
@@ -22,8 +24,8 @@ public class Building : MonoBehaviour
     public bool isItWorking() { return isWorking; }
 
 
-    public bool workingplace = false;
-    public bool restplace = false;
+    public bool workingplace { get; protected set; } = false;
+    public bool restplace { get; protected set; } = false;
 
     public int slots;
 
@@ -134,4 +136,7 @@ public class Building : MonoBehaviour
     {
         return users.Remove(user);
     }
+
+    public abstract List<GameObject> getMenuComponentToInstanciate();
+    public virtual void initializeMenuUIComponent(List<GameObject> instanciatedComponents) { }
 }

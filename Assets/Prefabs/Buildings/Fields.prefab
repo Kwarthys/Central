@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3768362311920366344}
   - component: {fileID: 4913573414703347454}
   - component: {fileID: 2476612351566689663}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,9 +106,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3457323871656641073}
-  - component: {fileID: -4780556259148669693}
-  m_Layer: 0
-  m_Name: Barracks
+  - component: {fileID: 3635761235659926467}
+  m_Layer: 7
+  m_Name: Fields
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4780556259148669693
+--- !u!114 &3635761235659926467
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,17 +141,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5688442073024933569}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cd9cc720d0ba7444b0992dfbb907a05, type: 3}
+  m_Script: {fileID: 11500000, guid: cdbf377bd33c4844081ad2e29eff1628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   alertPrefab: {fileID: 0}
   gridManager: {fileID: 0}
   connectingPoints:
   - {fileID: 121059155256065695}
+  buildingName: Traning Fields
   isWorking: 0
   roadConnected: 0
-  workingplace: 1
-  restplace: 0
   slots: 6
 --- !u!1 &6254708464345025746
 GameObject:
@@ -162,7 +161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 121059155256065695}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AccessPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +195,7 @@ GameObject:
   - component: {fileID: 8615014678056234679}
   - component: {fileID: 7192760511215517291}
   - component: {fileID: 8901576316880633199}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

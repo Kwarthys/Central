@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3457323871656641073}
   - component: {fileID: 8891229086763619320}
   m_Layer: 0
-  m_Name: Barracks_Ghost
+  m_Name: Fields_Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
