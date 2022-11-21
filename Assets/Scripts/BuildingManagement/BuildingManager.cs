@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    public BuildingMenuBehaviour buildingsMenu;
+    //public BuildingMenuBehaviour buildingsMenu;
 
     private List<Building> facilities = new List<Building>();
     private List<Building> roads = new List<Building>();

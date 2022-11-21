@@ -10,6 +10,7 @@ public class BuildingMenuBehaviour : MonoBehaviour
     public BuildingManager buildingManager;
 
     public Transform itemsHolder;
+    public GameObject menu;
 
     public TextMeshProUGUI buildingName;
 
@@ -41,7 +42,7 @@ public class BuildingMenuBehaviour : MonoBehaviour
             instanciatedMenuItems.Clear();
         }
 
-        gameObject.SetActive(state);
+        menu.SetActive(state);
     }
 
     public void setTitle(string name)

@@ -10,6 +10,7 @@ public class BuildingPlacer : MonoBehaviour
     public GameObject buildingAlertPrefab;
     public Transform buildingHolder;
     public BuildingManager buildingManager;
+    public PlayerInteractionDetector interactor;
 
     private GameObject placingPrefab = null;
 
@@ -25,9 +26,6 @@ public class BuildingPlacer : MonoBehaviour
 
     private Transform flyingBuilding;
     private BuildingDescriptor flyingDescriptor;
-
-    public GameObject builderMenu;
-    private bool builderMenuActive = false;
 
 
     private static BuildingPlacer instance;
@@ -47,8 +45,7 @@ public class BuildingPlacer : MonoBehaviour
         flyingBuilding = Instantiate(ghostPrefab).transform;
         flyingDescriptor = flyingBuilding.GetComponent<BuildingDescriptor>();
 
-        builderMenu.SetActive(false);
-        builderMenuActive = false;
+        interactor.switchBuilderMenu(false);
 
         placing = true;
     }
@@ -71,29 +68,11 @@ public class BuildingPlacer : MonoBehaviour
         }
 
         buildingManager.recomputeRoadConnected();
-
-        builderMenu.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            //Toggle Building Menu
-            if(builderMenuActive)
-            {
-                //deactivate menu
-                builderMenu.SetActive(false);
-                builderMenuActive = false;
-            }
-            else
-            {
-                //activate
-                builderMenu.SetActive(true);
-                builderMenuActive = true;
-            }
-        }
 
 
 

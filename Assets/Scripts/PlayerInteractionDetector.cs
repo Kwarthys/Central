@@ -11,10 +11,47 @@ public class PlayerInteractionDetector : MonoBehaviour
 
     public EventSystem eventSystem;
 
+    public GameObject builderMenu;
+    private bool builderMenuActive = false;
+
+    private void Start()
+    {
+        builderMenu.SetActive(false);
+    }
+
+    public void switchBuilderMenu(bool state)
+    {
+        builderMenu.SetActive(state);
+        builderMenuActive = state;
+    }
+
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.B))
         {
+            //Toggle Building Menu
+            if (builderMenuActive)
+            {
+                //deactivate menu
+                builderMenu.SetActive(false);
+                builderMenuActive = false;
+            }
+            else
+            {
+                //activate
+                builderMenu.SetActive(true);
+                builderMenuActive = true;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0) && !builderMenuActive) //Ignore clics here while builder menu is open. Builder menu has OnClic events and handles itself
+        {
+            if (eventSystem.currentSelectedGameObject != null)
+            {
+                //clicked on an UI element
+                return;
+            }
+
             Ray ray = theCamera.ScreenPointToRay(Input.mousePosition);
 
             if(Physics.Raycast(ray, out RaycastHit hit, 1000, interactibleLayers))
@@ -32,11 +69,7 @@ public class PlayerInteractionDetector : MonoBehaviour
                 /*** looking for characters ? ***/
             }
 
-            if(eventSystem.currentSelectedGameObject == null)
-            {
-                //Did not clic on an UI element
-                BuildingMenuBehaviour.instance.setState(false);
-            }
+            BuildingMenuBehaviour.instance.setState(false);
         }
     }
 }

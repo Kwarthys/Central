@@ -963,11 +963,11 @@ RectTransform:
   m_Father: {fileID: 1308634589}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -15.4, y: 0}
-  m_SizeDelta: {x: 49.4, y: 53.6}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -18.390015, y: -11.34}
+  m_SizeDelta: {x: 49.4, y: 53.600006}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &456789783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1308634590}
+      - m_Target: {fileID: 1552771558}
         m_TargetAssemblyTypeName: BuildingMenuBehaviour, Assembly-CSharp
         m_MethodName: OnDestroyBuildingClic
         m_Mode: 1
@@ -1222,7 +1222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41a6b466239ec44b8a6722024cf622e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingsMenu: {fileID: 1308634590}
   gridManager: {fileID: 1625138517}
 --- !u!4 &570371174
 Transform:
@@ -1595,7 +1594,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1308634589}
-  - component: {fileID: 1308634590}
   m_Layer: 5
   m_Name: BuildingsBaseMenu
   m_TagString: Untagged
@@ -1627,21 +1625,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1308634590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1308634588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d30de40cb7703034c89000890ed1cdc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingManager: {fileID: 570371173}
-  itemsHolder: {fileID: 536680308}
-  buildingName: {fileID: 323655659}
 --- !u!1 &1328288554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,6 +1706,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   eventSystem: {fileID: 556904783}
+  builderMenu: {fileID: 2054214691}
 --- !u!114 &1401323633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1877,6 +1861,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1552771556}
   - component: {fileID: 1552771557}
+  - component: {fileID: 1552771558}
   m_Layer: 5
   m_Name: BuildingMenuManager
   m_TagString: Untagged
@@ -1925,6 +1910,22 @@ MonoBehaviour:
   - {fileID: -646714247, guid: fe8f73c301354264fbf719b186c199dd, type: 3}
   panelButtonComponentPrefab: {fileID: 569630571743587692, guid: 6b976a84f4ba73f4d8f1899d5c0e28d9,
     type: 3}
+--- !u!114 &1552771558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552771555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30de40cb7703034c89000890ed1cdc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingManager: {fileID: 570371173}
+  itemsHolder: {fileID: 536680308}
+  menu: {fileID: 1308634588}
+  buildingName: {fileID: 323655659}
 --- !u!1 &1574391529
 GameObject:
   m_ObjectHideFlags: 0
@@ -2074,11 +2075,11 @@ MonoBehaviour:
     type: 3}
   buildingHolder: {fileID: 1621195855}
   buildingManager: {fileID: 570371173}
+  interactor: {fileID: 1401323632}
   housePrefab: {fileID: 9133244511569420765, guid: eea9ee600ad9b1949a1188125108e5e1,
     type: 3}
   roadPrefab: {fileID: 5814919113579820760, guid: bfd734722ad6ea643b0be055a3d3f35b,
     type: 3}
-  builderMenu: {fileID: 2054214691}
 --- !u!1 &2054214691
 GameObject:
   m_ObjectHideFlags: 0
