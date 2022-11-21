@@ -30,7 +30,7 @@ public class StateMachine
     public void registerState(State s, bool makeItCurrent)
     {
         registerState(s);
-        currentState = s;
+        if(makeItCurrent) currentState = s;
     }
 
     public void setCurrentState(State newState)
@@ -52,13 +52,11 @@ public class StateMachine
         {
             if(currentState.checkTransitions(out State newState))
             {
-                Debug.Log("Switch state from " + currentState.stateName + " to " + newState.stateName);
+                //Debug.Log("Switch state from " + currentState.stateName + " to " + newState.stateName);
                 setCurrentState(newState);
             }
 
             currentState.behave();
         }
     }
-
-
 }

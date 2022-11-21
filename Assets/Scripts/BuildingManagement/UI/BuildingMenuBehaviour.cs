@@ -29,6 +29,16 @@ public class BuildingMenuBehaviour : MonoBehaviour
 
     public void setState(bool state)
     {
+        if(!state)
+        {
+            for(int i = 0; i < instanciatedMenuItems.Count; ++i)
+            {
+                Destroy(instanciatedMenuItems[i]);
+            }
+
+            instanciatedMenuItems.Clear();
+        }
+
         gameObject.SetActive(state);
     }
 
@@ -45,14 +55,14 @@ public class BuildingMenuBehaviour : MonoBehaviour
 
         List<GameObject> componentPrefabs = b.getMenuComponentToInstanciate();
 
-        List<GameObject> instanciatedItems = new List<GameObject>();
+        instanciatedMenuItems = new List<GameObject>();
 
         for(int i = 0; i < componentPrefabs.Count; ++i)
         {
             //Debug.Log("Tryin to instanciate " + componentPrefabs[i]);
-            instanciatedItems.Add(Instantiate(componentPrefabs[i], itemsHolder));
+            instanciatedMenuItems.Add(Instantiate(componentPrefabs[i], itemsHolder));
         }
 
-        b.initializeMenuUIComponent(instanciatedItems);
+        b.initializeMenuUIComponent(instanciatedMenuItems);
     }
 }

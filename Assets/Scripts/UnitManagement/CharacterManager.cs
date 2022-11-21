@@ -21,21 +21,23 @@ public class CharacterManager : MonoBehaviour
             cb.updateBody();
         }
 
+        /***
         if(Input.GetKeyDown(KeyCode.U))
         {
             spawnACharacter();
         }
+        ***/
     }
 
-    private void spawnACharacter()
+    public void spawnACharacter(Vector3 spawnPoint)
     {
         Character c = new Character(this);
 
         buildingManager.assignCharacterToHouse(c);
 
-        CharacterBody body = Instantiate(characterBodyPrefab, c.house.connectingPoints[0].position, Quaternion.identity, charactersHolder).GetComponent<CharacterBody>();
+        CharacterBody body = Instantiate(characterBodyPrefab, spawnPoint, Quaternion.identity, charactersHolder).GetComponent<CharacterBody>();
 
-        if(body != null)
+        if (body != null)
         {
             body.character = c;
             c.setBody(body);
