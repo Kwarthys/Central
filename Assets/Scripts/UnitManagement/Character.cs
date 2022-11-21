@@ -123,6 +123,8 @@ public class Character
         State working = new State("Working");
         State travellingToRest = new State("TravellingToRest");
 
+        //State idle = new State("Idle");
+
         travellingToRest.setOnEnterBehaviour(travellingToRestEnterBehaviour);
         travellingToRest.addTransition(new Transition(resting, delegate () { return travelling == false; }));
 
@@ -139,6 +141,7 @@ public class Character
         stateMachine.registerState(working);
         stateMachine.registerState(travellingToRest, true);
         stateMachine.registerState(travellingToWork);
+        //stateMachine.registerState(idle);
     }
 
     private void travellingToWorkEnterBehaviour()

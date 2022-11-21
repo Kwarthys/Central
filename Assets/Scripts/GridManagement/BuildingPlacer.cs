@@ -212,16 +212,16 @@ public class BuildingPlacer : MonoBehaviour
         return true;
     }
 
-    private Building prepareBuildingForLife(GridNode n, GameObject newlySpanwed)
+    private Building prepareBuildingForLife(GridNode n, List<GridNode> footprint, GameObject newlySpanwed)
     {
         Building building = newlySpanwed.GetComponent<Building>();
         building.alertPrefab = buildingAlertPrefab;
         building.gridManager = gridManager;
         building.initialize();
 
-        building.associatedNode = n;
+        building.footprint = footprint;
 
-        if(n.isRoad)
+        if (n.isRoad)
         {
             n.road = building;
             buildingManager.registerNewRoad(building);
@@ -232,6 +232,13 @@ public class BuildingPlacer : MonoBehaviour
         }
 
         return building;
+    }
+
+    private Building prepareBuildingForLife(GridNode n, GameObject newlySpanwed)
+    {
+        List<GridNode> footprint = new();
+        footprint.Add(n);
+        return prepareBuildingForLife(n, footprint, newlySpanwed);
     }
 
     private bool placeFirstHandle()
@@ -254,13 +261,16 @@ public class BuildingPlacer : MonoBehaviour
         if (centerNode == null) return false;
         if (!centerNode.free) return false;
 
-        bool placementOK = gridManager.reserveSpot(flyingDescriptor, centerNode);
+        if(gridManager.tryReserveSpot(flyingDescriptor, centerNode, out List<GridNode> footprint))
+        {
+            prepareBuildingForLife(centerNode, footprint, Instantiate(flyingDescriptor.buildingPrefab, gridManager.gridNodeToWorld(centerNode) + computePlacementOffset(flyingDescriptor), Quaternion.Euler(0, flyingDescriptor.rotation, 0), buildingHolder));
 
-        if (!placementOK) return false;
-
-        prepareBuildingForLife(centerNode, Instantiate(flyingDescriptor.buildingPrefab, gridManager.gridNodeToWorld(centerNode) + computePlacementOffset(flyingDescriptor), Quaternion.Euler(0, flyingDescriptor.rotation,0), buildingHolder));
-
-        return true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }        
     }
 
     private GridNode getNodeUnderMouse()

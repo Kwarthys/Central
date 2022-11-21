@@ -13,6 +13,8 @@ public class BuildingManager : MonoBehaviour
 
     private AstarPathfinding pathfinder = new AstarPathfinding();
 
+    public BuildingGridManager gridManager;
+
     public void registerRootRoad(Building rootRoad)
     {
         roads.Remove(rootRoad);
@@ -26,8 +28,6 @@ public class BuildingManager : MonoBehaviour
         }
         rootRoads.AddRange(rootRoads);
     }
-
-    public BuildingGridManager gridManager;
 
     public void registerNewRoad(Building road)
     {
@@ -53,6 +53,45 @@ public class BuildingManager : MonoBehaviour
         {
             Debug.LogWarning("Facility already registered");
         }
+    }
+
+    public void destroyBuilding(Building toDestroy)
+    {
+        if(rootRoads.Contains(toDestroy))
+        {
+            Debug.LogWarning("Trying to remove root road");
+            return;
+        }
+
+        if(roads.Contains(toDestroy))
+        {
+            roads.Remove(toDestroy);
+        }
+        else if(facilities.Contains(toDestroy))
+        {
+            facilities.Remove(toDestroy);
+        }
+
+        gridManager.freeNodes(toDestroy.footprint);
+
+        if(toDestroy.restplace)
+        {
+            for(int i = 0; i < toDestroy.users.Count; ++i)
+            {
+                toDestroy.users[i].house = null;
+                assignCharacterToHouse(toDestroy.users[i]); //trying to find the guy a new home
+            }
+        }
+
+        if(toDestroy.workingplace)
+        {
+            for (int i = 0; i < toDestroy.users.Count; ++i)
+            {
+                toDestroy.users[i].workplace = null;
+            }
+        }
+
+        Destroy(toDestroy.gameObject);
     }
 
     public void recomputeRoadConnected()
@@ -178,9 +217,7 @@ public class BuildingManager : MonoBehaviour
 
     public bool assignCharacterToHouse(Character c)
     {
-
-        Debug.Log(facilities.Count + " facilites");
-
+        //Debug.Log(facilities.Count + " facilites");
         foreach(Building b in facilities)
         {
             if(b.restplace && b.isItWorking())

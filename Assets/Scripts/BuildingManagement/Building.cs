@@ -7,7 +7,7 @@ public abstract class Building : MonoBehaviour
     public GameObject alertPrefab;
     public BuildingGridManager gridManager;
 
-    public GridNode associatedNode;
+    public List<GridNode> footprint;
 
     public Transform[] connectingPoints;
     public List<GridNode> connectingNodes = new List<GridNode>();

@@ -6,12 +6,14 @@ using TMPro;
 public class BuildingMenuBehaviour : MonoBehaviour
 {
     public static BuildingMenuBehaviour instance;
+    
+    public BuildingManager buildingManager;
 
     public Transform itemsHolder;
 
     public TextMeshProUGUI buildingName;
 
-    private Building associatedBuilding;
+    public Building associatedBuilding { get; private set; }
 
     private List<GameObject> instanciatedMenuItems = new List<GameObject>();
 
@@ -64,5 +66,16 @@ public class BuildingMenuBehaviour : MonoBehaviour
         }
 
         b.initializeMenuUIComponent(instanciatedMenuItems);
+    }
+
+    public void OnDestroyBuildingClic()
+    {
+        if(associatedBuilding != null)
+        {
+            buildingManager.destroyBuilding(associatedBuilding);
+
+            setState(false);
+            associatedBuilding = null;
+        }
     }
 }

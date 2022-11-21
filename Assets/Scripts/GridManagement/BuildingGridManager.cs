@@ -105,6 +105,21 @@ public class BuildingGridManager : MonoBehaviour
         return true;
     }
 
+    public void freeNodes(List<GridNode> nodes)
+    {
+        for (int i = 0; i < nodes.Count; ++i)
+        {
+            nodes[i].free = true;
+            nodes[i].isRoad = false;
+        }
+    }
+
+    public void freeNode(GridNode node)
+    {
+        node.free = true;
+        node.isRoad = false;
+    }
+
 
     public bool pathIsFree(List<GridNode> path)
     {
@@ -159,18 +174,26 @@ public class BuildingGridManager : MonoBehaviour
     }
 
 
-    public bool reserveSpot(BuildingDescriptor descriptor, GridNode centerNode)
+    public bool tryReserveSpot(BuildingDescriptor descriptor, GridNode centerNode, out List<GridNode> buildingFootPrint)
     {
         RectInt footprint = getBuildingFootPrint(descriptor, centerNode);
         bool free = isPlacementFree(footprint);
 
-        if (!free) return false;
+        if (!free)
+        {
+            buildingFootPrint = null;
+            return false;
+        }
+
+        buildingFootPrint = new List<GridNode>();
 
         for (int j = footprint.y; j < footprint.y + footprint.height; ++j)
         {
             for (int i = footprint.x; i < footprint.x + footprint.width; ++i)
             {
-                getNodeAt(i, j).free = false;
+                GridNode n = getNodeAt(i, j);
+                n.free = false;
+                buildingFootPrint.Add(n);
             }
         }
 
