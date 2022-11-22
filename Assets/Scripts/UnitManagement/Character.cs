@@ -11,11 +11,16 @@ public class Character
 
     public float energy { get; private set; } = 100;
 
+    public CharacterRoles.Role role;
+
     public int lostEnergyPerSec = 50;
     public int restingEnergyGainPerSec = 40;
 
     public short stamina = 50;
     public float staminaPotential = 1;
+
+    public short strength= 50;
+    public float strengthPotential = 1;
 
     public short spirit = 50;
     public float spiritPotential = 1;

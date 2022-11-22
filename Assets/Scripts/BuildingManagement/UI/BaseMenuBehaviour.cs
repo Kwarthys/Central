@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class BuildingMenuBehaviour : MonoBehaviour
+public class BaseMenuBehaviour : MonoBehaviour
 {
-    public static BuildingMenuBehaviour instance;
-    
-    public BuildingManager buildingManager;
+    public static BaseMenuBehaviour instance;
 
     public Transform itemsHolder;
     public GameObject menu;
 
-    public TextMeshProUGUI buildingName;
+    public TextMeshProUGUI interactorName;
 
-    public Building associatedBuilding { get; private set; }
+    public IMenuInteractor associatedMenuGameObject { get; private set; }
 
     private List<GameObject> instanciatedMenuItems = new List<GameObject>();
 
@@ -22,10 +20,10 @@ public class BuildingMenuBehaviour : MonoBehaviour
     {
         if(instance != null)
         {
-            Debug.LogWarning("Multiple instances of BuildingMenuBehaviour");
+            Debug.LogWarning("Multiple instances of BaseMenuBehaviour");
         }
 
-        BuildingMenuBehaviour.instance = this;
+        BaseMenuBehaviour.instance = this;
 
         setState(false);
     }
@@ -47,16 +45,16 @@ public class BuildingMenuBehaviour : MonoBehaviour
 
     public void setTitle(string name)
     {
-        buildingName.text = name;
+        interactorName.text = name;
     }
 
-    public void setAssociatedBuilding(Building b)
+    public void setAssociatedInteractor(IMenuInteractor interactor)
     {
         setState(true);
-        associatedBuilding = b;
-        setTitle(b.buildingName);
+        associatedMenuGameObject = interactor;
+        setTitle(interactor.getDisplayedName());
 
-        List<GameObject> componentPrefabs = b.getMenuComponentToInstanciate();
+        List<GameObject> componentPrefabs = interactor.getMenuComponentToInstanciate();
 
         instanciatedMenuItems = new List<GameObject>();
 
@@ -66,17 +64,17 @@ public class BuildingMenuBehaviour : MonoBehaviour
             instanciatedMenuItems.Add(Instantiate(componentPrefabs[i], itemsHolder));
         }
 
-        b.initializeMenuUIComponent(instanciatedMenuItems);
+        interactor.initializeMenuUIComponent(instanciatedMenuItems);
     }
 
-    public void OnDestroyBuildingClic()
+    public void OnDestroyInteractorClic()
     {
-        if(associatedBuilding != null)
+        if(associatedMenuGameObject != null)
         {
-            buildingManager.destroyBuilding(associatedBuilding);
+            associatedMenuGameObject.delete();
 
             setState(false);
-            associatedBuilding = null;
+            associatedMenuGameObject = null;
         }
     }
 }

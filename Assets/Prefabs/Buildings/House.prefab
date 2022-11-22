@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26545f8f94d6d3448ad869ab8a70be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingType: 6
   alertPrefab: {fileID: 0}
   gridManager: {fileID: 0}
   connectingPoints:

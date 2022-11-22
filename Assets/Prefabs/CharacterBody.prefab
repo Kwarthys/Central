@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3149376753489414466}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 46519159072261195}
   - component: {fileID: 1082779840057158694}
   - component: {fileID: 7514208358393087541}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CharacterBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follower: {fileID: 7514208358393087541}
+  characterEnergy: 0
 --- !u!114 &7514208358393087541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +105,7 @@ GameObject:
   - component: {fileID: 6339335208867303034}
   - component: {fileID: 1456846955367016519}
   - component: {fileID: 5448364103213971230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

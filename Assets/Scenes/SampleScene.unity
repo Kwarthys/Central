@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 323655660}
   - component: {fileID: 323655659}
   m_Layer: 5
-  m_Name: BuildingName
+  m_Name: InteractorName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,7 +487,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Building Name
+  m_text: Interactor Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1013,8 +1013,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1552771558}
-        m_TargetAssemblyTypeName: BuildingMenuBehaviour, Assembly-CSharp
-        m_MethodName: OnDestroyBuildingClic
+        m_TargetAssemblyTypeName: BaseMenuBehaviour, Assembly-CSharp
+        m_MethodName: OnDestroyInteractorClic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1595,7 +1595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1308634589}
   m_Layer: 5
-  m_Name: BuildingsBaseMenu
+  m_Name: BaseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1863,7 +1863,7 @@ GameObject:
   - component: {fileID: 1552771557}
   - component: {fileID: 1552771558}
   m_Layer: 5
-  m_Name: BuildingMenuManager
+  m_Name: BaseMenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1922,10 +1922,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30de40cb7703034c89000890ed1cdc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingManager: {fileID: 570371173}
   itemsHolder: {fileID: 536680308}
   menu: {fileID: 1308634588}
-  buildingName: {fileID: 323655659}
+  interactorName: {fileID: 323655659}
 --- !u!1 &1574391529
 GameObject:
   m_ObjectHideFlags: 0

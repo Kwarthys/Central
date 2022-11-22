@@ -196,6 +196,7 @@ public class BuildingPlacer : MonoBehaviour
         Building building = newlySpanwed.GetComponent<Building>();
         building.alertPrefab = buildingAlertPrefab;
         building.gridManager = gridManager;
+        building.buildingManager = buildingManager;
         building.initialize();
 
         building.footprint = footprint;

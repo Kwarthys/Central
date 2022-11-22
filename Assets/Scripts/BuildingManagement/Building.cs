@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Building : MonoBehaviour
+public abstract class Building : MonoBehaviour, IMenuInteractor
 {
+    public enum Type { None, StaminaTraining, AimTraining, StrengthTraining, SpiritTraining, Mission, House, Admissions, Road, Kitchen}
+
+    public Type buildingType;
+
     public GameObject alertPrefab;
     public BuildingGridManager gridManager;
+    public BuildingManager buildingManager;
 
     public List<GridNode> footprint;
 
@@ -93,17 +98,6 @@ public abstract class Building : MonoBehaviour
         roadConnected = status;
 
         if (!status) isWorking = false;
-
-        /*
-        if(status)
-        {
-            despawnAlert();
-        }
-        else
-        {
-            spawnAlert();
-        }
-        */
     }
 
     public int getBuildingCapacity()
@@ -139,4 +133,14 @@ public abstract class Building : MonoBehaviour
 
     public abstract List<GameObject> getMenuComponentToInstanciate();
     public virtual void initializeMenuUIComponent(List<GameObject> instanciatedComponents) { }
+
+    public void delete()
+    {
+        buildingManager.destroyBuilding(this);
+    }
+
+    public string getDisplayedName()
+    {
+        return buildingName;
+    }
 }

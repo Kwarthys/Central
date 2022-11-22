@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBody : MonoBehaviour
+public class CharacterBody : MonoBehaviour, IMenuInteractor
 {
     public Character character;
 
@@ -29,5 +29,25 @@ public class CharacterBody : MonoBehaviour
     public void registerNewReachDestinationCallback(PathFollower.reachDestinationCallback c)
     {
         follower.registerNewReachDestinationCallback(c);
+    }
+
+    public void delete()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public List<GameObject> getMenuComponentToInstanciate()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void initializeMenuUIComponent(List<GameObject> instanciatedComponents)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public string getDisplayedName()
+    {
+        return $"Solider {character.name}";
     }
 }

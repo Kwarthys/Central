@@ -62,14 +62,23 @@ public class PlayerInteractionDetector : MonoBehaviour
                 if(b != null)
                 {
                     //Debug.Log("Found");
-                    BuildingMenuBehaviour.instance.setAssociatedBuilding(b);
+                    BaseMenuBehaviour.instance.setAssociatedInteractor(b);
                     return;
                 }
 
                 /*** looking for characters ? ***/
+
+                CharacterBody c = hit.transform.GetComponentInParent<CharacterBody>();
+
+                if(c != null)
+                {
+                    //open character menu
+                    BaseMenuBehaviour.instance.setAssociatedInteractor(c);
+                    return;
+                }
             }
 
-            BuildingMenuBehaviour.instance.setState(false);
+            BaseMenuBehaviour.instance.setState(false);
         }
     }
 }
