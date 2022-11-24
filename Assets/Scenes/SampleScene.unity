@@ -961,7 +961,7 @@ RectTransform:
   m_Children:
   - {fileID: 853269911}
   m_Father: {fileID: 1308634589}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1092,7 +1092,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1308634589}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1615,8 +1615,8 @@ RectTransform:
   m_Children:
   - {fileID: 303211708}
   - {fileID: 323655658}
-  - {fileID: 536680308}
   - {fileID: 456789782}
+  - {fileID: 536680308}
   m_Father: {fileID: 1552771556}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1909,6 +1909,8 @@ MonoBehaviour:
   - {fileID: -1675948760, guid: fe8f73c301354264fbf719b186c199dd, type: 3}
   - {fileID: -646714247, guid: fe8f73c301354264fbf719b186c199dd, type: 3}
   panelButtonComponentPrefab: {fileID: 569630571743587692, guid: 6b976a84f4ba73f4d8f1899d5c0e28d9,
+    type: 3}
+  panelDropdownPrefab: {fileID: 2950671117842811788, guid: f9d10524d0a831b47a4674ebc205edb0,
     type: 3}
 --- !u!114 &1552771558
 MonoBehaviour:

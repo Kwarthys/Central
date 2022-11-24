@@ -38,12 +38,27 @@ public class CharacterBody : MonoBehaviour, IMenuInteractor
 
     public List<GameObject> getMenuComponentToInstanciate()
     {
-        throw new System.NotImplementedException();
+        List<GameObject> prefabs = new List<GameObject>();
+
+        prefabs.Add(BuildingMenusFactory.factory.getPanelDropdownPrefab());
+
+        return prefabs;
     }
 
     public void initializeMenuUIComponent(List<GameObject> instanciatedComponents)
     {
-        throw new System.NotImplementedException();
+        PanelDropDownComponent component = instanciatedComponents[0].GetComponent<PanelDropDownComponent>();
+
+        List<string> roles = new();
+        roles.Add("Soldier");
+        roles.Add("Cook");
+
+        component.initialize(new PanelDropDownData("Assign Role : ", roles, onRoleSelected));
+    }
+
+    private void onRoleSelected(string role)
+    {
+        Debug.Log(role);
     }
 
     public string getDisplayedName()

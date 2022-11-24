@@ -9,6 +9,7 @@ public class BuildingMenusFactory : MonoBehaviour
     public static BuildingMenusFactory factory;
 
     public GameObject panelButtonComponentPrefab;
+    public GameObject panelDropdownPrefab;
 
     private void Awake()
     {
@@ -18,6 +19,11 @@ public class BuildingMenusFactory : MonoBehaviour
     public GameObject getPanelButtonPrefab()
     {
         return panelButtonComponentPrefab;
+    }
+
+    public GameObject getPanelDropdownPrefab()
+    {
+        return panelDropdownPrefab;
     }
 
     public Sprite getRandomFace()
